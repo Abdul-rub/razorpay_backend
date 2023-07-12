@@ -60,7 +60,7 @@ export const VerifyPayment = async (req, res) => {
             <p>Redirecting to homepage in 5 seconds...</p>
             <script>
               setTimeout(function() {
-                window.location.href = "/";
+                window.location.href = "https://wonderful-nasturtium-00ca4b.netlify.app/";
               }, 5000);
             </script>
           </body>
