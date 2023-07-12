@@ -50,10 +50,10 @@ export const VerifyPayment = async (req, res) => {
         razorpay_signature,
         status: "success", 
       });
-      window.location.href = `https://razorpay-integration.onrender.com/paymentsuccessful?reference=${razorpay_payment_id}`;
+      res.redirect(`https://razorpay-integration.onrender.com/paymentsuccessful?reference=${razorpay_payment_id}`);
     } catch (error) {
       console.error(error);
-      window.location.href =`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`;
+      res.redirect(`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`);
     }
   } else {
     try {
@@ -64,7 +64,7 @@ export const VerifyPayment = async (req, res) => {
         razorpay_signature,
         status: "failed", 
       });
-      window.location.href =`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`;
+      res.redirect(`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`);
     } catch (error) {
       console.error(error);
       res.status(500).json({
@@ -86,4 +86,3 @@ export const getPaymentHistory = async (req, res) => {
     res.status(500).json({ success: false, error: "Failed to fetch payment history." });
   }
 };
-
