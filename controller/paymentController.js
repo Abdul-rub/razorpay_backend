@@ -88,6 +88,6 @@ export const getPaymentHistory = async (req, res) => {
 };
 
 //PaymentSuccessfull
-export const getPaymentSuccessfull = async(res,res)=>{
+export const getPaymentSuccessfull = async(req,res)=>{
   res.send('Payment Successfull')
 }
