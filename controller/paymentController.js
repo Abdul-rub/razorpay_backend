@@ -50,10 +50,10 @@ export const VerifyPayment = async (req, res) => {
         razorpay_signature,
         status: "success", 
       });
-      res.redirect(`https://razorpay-integration.onrender.com/paymentsuccessful?reference=${razorpay_payment_id}`);
+      window.location.href = `https://razorpay-integration.onrender.com/paymentsuccessful?reference=${razorpay_payment_id}`;
     } catch (error) {
       console.error(error);
-      res.redirect(`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`);
+      window.location.href =`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`;
     }
   } else {
     try {
@@ -64,7 +64,7 @@ export const VerifyPayment = async (req, res) => {
         razorpay_signature,
         status: "failed", 
       });
-      res.redirect(`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`);
+      window.location.href =`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`;
     } catch (error) {
       console.error(error);
       res.status(500).json({
@@ -87,7 +87,3 @@ export const getPaymentHistory = async (req, res) => {
   }
 };
 
-//PaymentSuccessfull
-export const getPaymentSuccessfull = async(req,res)=>{
-  res.send('Payment Successfull')
-}

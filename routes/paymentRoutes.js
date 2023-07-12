@@ -10,6 +10,6 @@ router.route("/verifypayment").post(VerifyPayment)
 
 router.route("/paymenthistory").get(getPaymentHistory)
 
-router.route("/paymentsuccessful").get(getPaymentSuccessfull)
+
 
 export default router;
