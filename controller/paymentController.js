@@ -48,12 +48,17 @@ export const VerifyPayment = async (req, res) => {
         razorpay_order_id,
         razorpay_payment_id,
         razorpay_signature,
-        status: "success", 
+        status: "success",
       });
-      res.redirect(`https://razorpay-integration.onrender.com/paymentsuccessful?reference=${razorpay_payment_id}`);
+
+      const successHtml = `<html><body><h1>Payment Successful</h1><p>Payment ID: ${razorpay_payment_id}</p></body></html>`;
+      res.setHeader("Content-Type", "text/html");
+      res.status(200).send(successHtml);
     } catch (error) {
       console.error(error);
-      res.redirect(`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`);
+      const failureHtml = `<html><body><h1>Payment Failed</h1></body></html>`;
+      res.setHeader("Content-Type", "text/html");
+      res.status(500).send(failureHtml);
     }
   } else {
     try {
@@ -62,15 +67,17 @@ export const VerifyPayment = async (req, res) => {
         razorpay_order_id,
         razorpay_payment_id,
         razorpay_signature,
-        status: "failed", 
+        status: "failed",
       });
-      res.redirect(`https://razorpay-integration.onrender.com/paymentfailed?reference=${razorpay_order_id}`);
+
+      const failureHtml = `<html><body><h1>Payment Failed</h1></body></html>`;
+      res.setHeader("Content-Type", "text/html");
+      res.status(200).send(failureHtml);
     } catch (error) {
       console.error(error);
-      res.status(500).json({
-        success: false,
-        error: "An error occurred while saving the payment details.",
-      });
+      const failureHtml = `<html><body><h1>Payment Failed</h1></body></html>`;
+      res.setHeader("Content-Type", "text/html");
+      res.status(500).send(failureHtml);
     }
   }
 };
