@@ -30,6 +30,7 @@ export const checkout = async (req, res) => {
 
 
 //Verifying the payment 
+// Verifying the payment
 export const VerifyPayment = async (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
@@ -51,7 +52,20 @@ export const VerifyPayment = async (req, res) => {
         status: "success",
       });
 
-      const successHtml = `<html><body><h1>Payment Successful</h1><p>Payment ID: ${razorpay_payment_id}</p></body></html>`;
+      const successHtml = `
+        <html>
+          <body>
+            <h1>Payment Successful</h1>
+            <p>Payment ID: ${razorpay_payment_id}</p>
+            <p>Redirecting to homepage in 5 seconds...</p>
+            <script>
+              setTimeout(function() {
+                window.location.href = "/";
+              }, 5000);
+            </script>
+          </body>
+        </html>
+      `;
       res.setHeader("Content-Type", "text/html");
       res.status(200).send(successHtml);
     } catch (error) {
@@ -81,6 +95,7 @@ export const VerifyPayment = async (req, res) => {
     }
   }
 };
+
 
 
 //Payment History
