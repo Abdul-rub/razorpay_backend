@@ -86,3 +86,8 @@ export const getPaymentHistory = async (req, res) => {
     res.status(500).json({ success: false, error: "Failed to fetch payment history." });
   }
 };
+
+//PaymentSuccessfull
+export const getPaymentSuccessfull = async(res,res)=>{
+  res.send('Payment Successfull')
+}
